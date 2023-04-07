@@ -30,7 +30,7 @@ if(info.friend) {
 
 // 解决方案2： 非空断言 (只有确保friend一定有值的情况下，才能使用)
 info.friend!.name = 'coder'
-console.log(info.friend?.name)
+// console.log(info.friend?.name)
 
 // 我get不到非空断言你的任何好处 用你不如不用你 债见！
 function liveDangerously(x?: number | null) {
