@@ -61,6 +61,36 @@ calc((num1, num2) => {
 })
 
 
+// 调用签名
+// 从对象的角度看待这个函数，可以有其他调用赋值等操作
+type barType = (num: number) => number;
+
+interface IBar {
+  name: string,
+  age: number,
+  (num: number): number // 调用签名
+}
+
+// const bar3: barType = (num: number):number => {
+//   return 123
+// }
+
+const bar3: IBar = (num: number):number => {
+  return 123
+}
+// 新增bar3.xxx 对象调用
+bar3.name = 'aaa'
+bar3.age = 26
+
+bar3(444) // 调用
+
+
+/**
+ * 
+ * 开发中如何选择：
+ * 1. 如果只是描述函数类型本身（函数可以被调用），使用函数类型表达式 (function type expression)
+ * 2. 如果在描述函数作为对象可以背调用，同时也有其他属性时，使用函数调用签名（call signature）
+ */
 
 
 export {};
