@@ -100,3 +100,5 @@ const dog:IRun = {
 }
 move(fish)
 move(dog)
+
+export {}
