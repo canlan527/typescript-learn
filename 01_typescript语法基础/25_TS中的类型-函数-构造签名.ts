@@ -16,3 +16,5 @@ function factory(fn: IPCTOR) {
 }
 
 factory(Person)
+
+export {}
