@@ -97,3 +97,6 @@ const shape1:Shape = new Rectangle(100, 300)
 
 // 错误的使用方式：不报错
 calcArea({getArea(){}})
+
+
+export {}
