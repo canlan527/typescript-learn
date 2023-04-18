@@ -1,8 +1,8 @@
 // 练习 useState函数
-function useState<Type>(initValue:Type):[Type, (n:Type) => void] {
+function useState<Type>(initValue:Type):[Type, (newState:Type) => void] {
   let state = initValue
-  function setState(value) {
-    state = value;
+  function setState(newState:Type) {
+    state = newState;
   }
   return [state, setState]
 }
