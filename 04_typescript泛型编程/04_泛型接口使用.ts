@@ -33,3 +33,4 @@ const ikun1 = {
   slogan: '🐔你太美'
 }
 
+export {}
