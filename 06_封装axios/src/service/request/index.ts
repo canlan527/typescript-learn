@@ -40,7 +40,11 @@ export default class XNRequest {
   }
 
   // 封装网络请求的方法
-  request(config: AxiosRequestConfig){
+  request(config: XNRequestConfig){
+    // 单次请求的拦截成功处理
+    if(config.interceptors?.requestSuccessFn) {
+      config = config.interceptors.requestSuccessFn(config)
+    }
     return this.instance.request(config)
   }
 
