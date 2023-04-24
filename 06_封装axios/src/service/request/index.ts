@@ -24,7 +24,7 @@ export default class XNRequest {
     this.instance.interceptors.response.use((res) => {
       // 全局响应成功的拦截
       console.log('全局响应成功的拦截')
-      return res;
+      return res.data; // 返回res.data
     }, (err) => {
       // 全局响应失败的拦截
       console.log('全局响应失败的拦截')
@@ -44,17 +44,18 @@ export default class XNRequest {
   }
 
   // 封装网络请求的方法
-  request(config: XNRequestConfig){
+  request<T = any>(config: XNRequestConfig){
     // 单次请求的拦截成功处理
     if(config.interceptors?.requestSuccessFn) {
       config = config.interceptors.requestSuccessFn(config)
     }
     // return this.instance.request(config)
     // 单次响应的拦截成功处理
-    return new Promise<AxiosResponse>((resolve, reject) => {
-      this.instance.request(config).then((res) => {
+    // 为了更好的让调用接口的时候定义res响应数据类型，Promise要使用泛型
+    return new Promise<T>((resolve, reject) => {
+      this.instance.request<any, T>(config).then((res) => {
         if(config.interceptors?.responseSuccessFn) {
-          config = config.interceptors.responseSuccessFn(res)
+          // config = config.interceptors.responseSuccessFn(res)
         }
         resolve(res)
       }).catch(err => {
