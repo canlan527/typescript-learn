@@ -7,7 +7,7 @@ import type { AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig } fr
 
 // 抽离interceptors
 export interface XNInterceptors {
-  requestSuccessFn?: (config: AxiosRequestConfig) => any,
+  requestSuccessFn?: (config: any) => any,
   // requestSuccessFn?: (config: InternalAxiosRequestConfig) => InternalAxiosRequestConfig,
   // requestSuccessFn?: (config: AxiosRequestConfig) => AxiosRequestConfig,
   requestFailFn?: (err: any) => any,

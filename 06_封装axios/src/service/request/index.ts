@@ -45,7 +45,18 @@ export default class XNRequest {
     if(config.interceptors?.requestSuccessFn) {
       config = config.interceptors.requestSuccessFn(config)
     }
-    return this.instance.request(config)
+    // return this.instance.request(config)
+    // 单次响应的拦截成功处理
+    return new Promise((resolve, reject) => {
+      this.instance.request(config).then((res) => {
+        if(config.interceptors?.responseSuccessFn) {
+          config = config.interceptors.responseSuccessFn(res)
+        }
+        resolve(res)
+      }).catch(err => {
+        reject(err)
+      })
+    })
   }
 
   get(){}
