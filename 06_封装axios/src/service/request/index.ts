@@ -13,17 +13,21 @@ export default class XNRequest {
     // 每个instance实例都添加拦截器
     this.instance.interceptors.request.use((config) => {
       // 全局请求成功的拦截
+      console.log('全局请求成功的拦截')
       return config
     }, (err) => {
       // 全局请求失败的拦截
+      console.log('全局请求失败的拦截')
       return err;
     })
 
     this.instance.interceptors.response.use((res) => {
       // 全局响应成功的拦截
+      console.log('全局响应成功的拦截')
       return res;
     }, (err) => {
       // 全局响应失败的拦截
+      console.log('全局响应失败的拦截')
       return err;
     })
 
@@ -47,7 +51,7 @@ export default class XNRequest {
     }
     // return this.instance.request(config)
     // 单次响应的拦截成功处理
-    return new Promise((resolve, reject) => {
+    return new Promise<AxiosResponse>((resolve, reject) => {
       this.instance.request(config).then((res) => {
         if(config.interceptors?.responseSuccessFn) {
           config = config.interceptors.responseSuccessFn(res)

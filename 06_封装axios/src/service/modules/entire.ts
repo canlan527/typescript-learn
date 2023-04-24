@@ -7,7 +7,7 @@ xnRequest2.request({
     offset: 0,
     size: 20,
   }
-}).then((res: any) => {
+}).then((res) => {
   console.log(res.data)
 })
 
@@ -25,6 +25,6 @@ xnRequest2.request({
       return res;
     }
   }
-}).then((res: any) => {
+}).then((res) => {
   console.log(res)
 })
