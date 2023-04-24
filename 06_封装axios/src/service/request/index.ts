@@ -64,7 +64,24 @@ export default class XNRequest {
     })
   }
 
-  get(){}
+  get<T= any>(config: XNRequestConfig<T>){
+    return this.request({...config, method: 'GET'})
+  }
 
-  post(){}
+  post<T = any>(config: XNRequestConfig<T>){
+    return this.request({...config, method: 'POST'})
+  }
+
+  delete<T = any>(config: XNRequestConfig<T>){
+    return this.request({...config, method: 'DELETE'})
+  }
+
+  patch<T = any>(config: XNRequestConfig<T>){
+    return this.request({...config, method: 'PATCH'})
+  }
+
+  put<T = any>(config: XNRequestConfig<T>){
+    return this.request({...config, method: 'PUT'})
+  }
+
 }
