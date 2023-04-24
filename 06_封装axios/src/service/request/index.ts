@@ -44,7 +44,7 @@ export default class XNRequest {
   }
 
   // 封装网络请求的方法
-  request<T = any>(config: XNRequestConfig){
+  request<T = any>(config: XNRequestConfig<T>){
     // 单次请求的拦截成功处理
     if(config.interceptors?.requestSuccessFn) {
       config = config.interceptors.requestSuccessFn(config)
@@ -55,7 +55,7 @@ export default class XNRequest {
     return new Promise<T>((resolve, reject) => {
       this.instance.request<any, T>(config).then((res) => {
         if(config.interceptors?.responseSuccessFn) {
-          // config = config.interceptors.responseSuccessFn(res)
+          res = config.interceptors.responseSuccessFn(res)
         }
         resolve(res)
       }).catch(err => {
