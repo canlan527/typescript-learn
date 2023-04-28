@@ -25,7 +25,13 @@ module.exports = {
   },
   devServer: {
     port: 9095,
-    open: true
+    open: true,
+    proxy: {
+      '/posts': {
+          target: 'http://localhost:3000',  //接口实际目标地址
+          changeOrigin: true  //启动跨域
+      }
+  }
   },
   plugins: [
     new HtmlWebpackPlugin({
