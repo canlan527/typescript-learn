@@ -38,9 +38,27 @@ const data = [
 // })
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:true}))
-
+// simple1
 router.get('/posts', (req, res) => {
-  res.json(data)
+  res.json(req.query)
+})
+
+// simple2
+router.post('/posts', (req, res) => {
+  res.json(req.body)
+})
+
+router.post('/posts/buffer', (req, res) => {
+  let msg = []
+  req.on('data', (chunk) => {
+    if(chunk) {
+      msg.push(chunk)
+    }
+  })
+  req.on('end', () => {
+    let buf = Buffer.concat(msg)
+    res.json(buf.toJSON())
+  })
 })
 
 app.use(router)
