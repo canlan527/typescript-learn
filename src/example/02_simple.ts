@@ -21,6 +21,8 @@ axios({
     name: 'jxz',
     age: 20
   }
+}).then(res => {
+  console.log(res)
 })
 
 const arr = new Int32Array([21, 31])

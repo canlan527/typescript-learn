@@ -3,11 +3,12 @@ import xhr from "./xhr";
 import { buildURL } from "./helpers/url";
 import { transformRequest } from './helpers/data';
 import { processHeaders } from './helpers/headers';
+import { AxiosPromise } from './types';
 
 // 作为库的入口文件
-function axios(config: AxiosRequestConfig): void {
+function axios(config: AxiosRequestConfig): AxiosPromise {
   processConfig(config);
-  xhr(config);
+  return xhr(config);
 }
 
 // 处理config
