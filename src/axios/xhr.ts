@@ -2,21 +2,29 @@ import { parseHeaders } from "./helpers/headers";
 import { AxiosPromise, AxiosRequestConfig, AxiosResponse } from "./types";
 // 实现所有的请求逻辑
 export default function xhr(config: AxiosRequestConfig): AxiosPromise {
-  return new Promise((resolve) => {
-    const { url, method = "GET", data = null, headers, responseType } = config;
+  return new Promise((resolve, reject) => {
+    const { url, method = "GET", data = null, headers, responseType, timeout } = config;
 
     const request = new XMLHttpRequest(); //新建请求实例
     // 如果传进来responseType就给request对象上也赋值这个属性
     if(responseType) {
       request.responseType = responseType
     }
-
+    // 如果没传timeout默认为0，即没有延迟
+    if(timeout) {
+      request.timeout = timeout
+    }
+    
     //  调用open方法:方法名（大写），地址，默认异步
     request.open(method.toUpperCase(), url, true);
 
     // request的onreadystatechange
     request.onreadystatechange = function handleLoad() {
       if(request.readyState !== 4) { // 4的状态代表可以正确接收到响应结果，不是4就return
+        return
+      }
+      // 当网络错误或超时错误 状态码为0 直接返回
+      if(request.status === 0) {
         return
       }
       // 获取request-header
@@ -34,8 +42,17 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
         statusText: request.statusText,
         headers: responseHeaders,
       }
-      resolve(response) // 之后通过promise.then就可以拿到响应对象
+      resolve(response)
+      // handleResponse(response) // 根据正常\非正常情况做处理
     } 
+    // 处理错误情况
+    request.onerror = function handleError() {
+      reject(new Error('Network Error'))
+    }
+    // 处理超时时间
+    request.ontimeout = function handleTimeout() {
+      reject(new Error(`Timeout of ${timeout}ms exceeded`))
+    }
 
     // 处理headers,如果data为空就删除content-type项，否则将传入的headers配置设置进xhr的headers里
     Object.keys(headers).forEach((name) => {
@@ -45,7 +62,19 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
         request.setRequestHeader(name, headers[name]);
       }
     });
+
     // send 发送请求
     request.send(data);
+
+    // 根据返回状态码做不同处理
+    function handleResponse(response: AxiosResponse): void {
+      // 如果响应状态码在 200 - 300之间(正常情况)
+      if(response.status >= 200 && response.status < 300) {
+        resolve(response) // 之后通过promise.then就可以拿到响应对象
+      } else {
+        reject(new Error(`Request failed with statusCode ${response.status}`))
+      }
+    }
+
   });
 }
