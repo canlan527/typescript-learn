@@ -1,4 +1,4 @@
-import axios from "../axios";
+import axios, {AxiosError} from "../axios";
 
 axios({
   url: '/api/taking',
@@ -38,7 +38,10 @@ axios({
   timeout: 2000, // 配置超时时间
 }).then(res => {
   console.log(res)
-}).catch(err => {
-  console.log(err)
+}).catch((err: AxiosError) => {
+  console.log(err.message)
+  console.log(err.code)
+  console.log(err.config)
+  console.log(err.isAxiosError)
 })
 
