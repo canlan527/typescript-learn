@@ -39,16 +39,16 @@ const data = [
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:true}))
 // simple1
-router.get('/posts', (req, res) => {
+router.get('/api/posts', (req, res) => {
   res.json(req.query)
 })
 
 // simple2
-router.post('/posts', (req, res) => {
+router.post('/api/posts', (req, res) => {
   res.json(req.body)
 })
 
-router.post('/posts/buffer', (req, res) => {
+router.post('/api/posts/buffer', (req, res) => {
   let msg = []
   req.on('data', (chunk) => {
     if(chunk) {
@@ -60,6 +60,24 @@ router.post('/posts/buffer', (req, res) => {
     res.json(buf.toJSON())
   })
 })
+
+// error
+// 随机返回500状态码
+router.get('/api/taking', (req, res) => {
+  if(Math.random() > 0.5) {
+    res.json(data)
+  }else {
+    res.status(500)
+    res.end()
+  }
+})
+// 模拟超时
+router.get('/api/taking/timeout', (req, res) => {
+  setTimeout(() => {
+    res.json(data)
+  }, 3000)
+})
+
 
 app.use(router)
 

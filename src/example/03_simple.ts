@@ -1,7 +1,7 @@
 import axios from "../axios";
 
 axios({
-  url: '/posts',
+  url: '/api/posts',
   method: 'post',
   data: {
     name: 'jxz',
@@ -12,7 +12,7 @@ axios({
 })
 
 axios({
-  url: '/posts',
+  url: '/api/posts',
   method: 'post',
   responseType: 'json',
   data: {

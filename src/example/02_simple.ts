@@ -2,7 +2,7 @@ import axios from "../axios";
 
 axios({
   method: 'post',
-  url: '/posts',
+  url: '/api/posts',
   params: {
     a: 1,
     b: 2
@@ -12,7 +12,7 @@ axios({
 
 axios({
   method: 'post',
-  url: '/posts',
+  url: '/api/posts',
   headers: {
     'content-type': 'application/json',
     'Accept': 'application/json, text/plain, */*'
@@ -29,7 +29,7 @@ const arr = new Int32Array([21, 31])
 
 axios({
   method: 'post',
-  url: '/posts/buffer',
+  url: '/api/posts/buffer',
   data: arr
 })
 
@@ -37,7 +37,7 @@ const paramsString = 'q=URLUtils.searchParams&topic=api'
 const searchParams = new URLSearchParams(paramsString)
 
 axios({
-  url: 'posts',
+  url: '/api/posts',
   method: 'post',
   data: searchParams
 })

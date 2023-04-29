@@ -27,7 +27,7 @@ module.exports = {
     port: 9095,
     open: true,
     proxy: {
-      '/posts': {
+      '/api': {
           target: 'http://localhost:3000',  //接口实际目标地址
           changeOrigin: true  //启动跨域
       }
