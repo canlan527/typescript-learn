@@ -1,6 +1,6 @@
-import { parseHeaders } from "./helpers/headers";
-import { AxiosPromise, AxiosRequestConfig, AxiosResponse } from "./types";
-import { createError } from './helpers/error';
+import { parseHeaders } from "../helpers/headers";
+import { AxiosPromise, AxiosRequestConfig, AxiosResponse } from "../types";
+import { createError } from '../helpers/error';
 // 实现所有的请求逻辑
 export default function xhr(config: AxiosRequestConfig): AxiosPromise {
   return new Promise((resolve, reject) => {
@@ -17,7 +17,7 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
     }
     
     //  调用open方法:方法名（大写），地址，默认异步
-    request.open(method.toUpperCase(), url, true);
+    request.open(method.toUpperCase(), url!, true); // url非空断言，肯定等到执行时url是有值的
 
     // request的onreadystatechange
     request.onreadystatechange = function handleLoad() {
