@@ -15,8 +15,8 @@ export function isPlainObject(val: any) :val is Object {
 
 // extend用作拷贝,交叉类型,把 from 拷贝到 to里
 export function extend<T, U>(to: T, from: U): T & U {
-  for(const key in from) {
-    (to as T & U)[key] = from[key] as any
+  for (const key in from) {
+    ;(to as T & U)[key] = from[key] as any
   }
   return to as T & U
 }

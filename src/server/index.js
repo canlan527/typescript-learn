@@ -78,6 +78,24 @@ router.get('/api/taking/timeout', (req, res) => {
   }, 3000)
 })
 
+// extend接口
+router.head('/api/extend/head', (req, res) => {
+  res.end()
+})
+router.options('/api/extend/options', (req, res) => {
+  res.end()
+})
+router.delete('/api/extend/delete', (req, res) => {
+  res.end()
+})
+router.put('/api/posts', (req, res) => {
+  res.json(req.body)
+})
+
+router.patch('/api/extend/patch', (req, res) => {
+  res.json(req.body)
+})
+
 
 app.use(router)
 
