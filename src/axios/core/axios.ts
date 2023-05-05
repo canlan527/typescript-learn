@@ -1,7 +1,15 @@
 import { AxiosRequestConfig, AxiosPromise } from '../types/index';
 import dispatchRequest from './dispatchRequest';
 export default class Axios {
-  request(config: AxiosRequestConfig): AxiosPromise {
+  request(url: any, config?: any): AxiosPromise {
+    if(typeof url === 'string') {
+      if(!config) {
+        config = {}  // 如果没传config，将config设置成空对象
+      }
+      config.url = url;
+    } else {
+      config = url
+    }
     return dispatchRequest(config)
   }
 
