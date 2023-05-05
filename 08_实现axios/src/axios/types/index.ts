@@ -41,6 +41,10 @@ export interface AxiosError extends Error {
 // 混合对象axios本身是一个函数，我们再实现一个包括属性方法的类，然后把这个类的原型属性和自身属性拷贝到axios上
 
 export interface Axios {
+  interceptors: {
+    request: AxiosInterceptorsManager<AxiosRequestConfig>,
+    response: AxiosInterceptorsManager<AxiosResponse>
+  }
   request<T = any>(config: AxiosRequestConfig): AxiosPromise<T>
   get<T = any>(url: string, config?: AxiosRequestConfig): AxiosPromise<T>
   delete<T = any>(url: string, config?: AxiosRequestConfig): AxiosPromise<T>
@@ -58,7 +62,7 @@ export interface AxiosInstance extends Axios {
 
 // 拦截器管理接口
 export interface AxiosInterceptorsManager<T> {
-  use(resolved: ResolvedFn<T>, rejected: RejectedFn): number // 返回创建拦截器的id
+  use(resolved: ResolvedFn<T>, rejected?: RejectedFn): number // 返回创建拦截器的id
   eject(id: number): void // 根据id删除拦截器
 }
 // 定义函数类型，resolve参数由传入者决定，返回传入的类型 或者Promise类型

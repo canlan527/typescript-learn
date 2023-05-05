@@ -1,6 +1,26 @@
-import { AxiosRequestConfig, AxiosPromise } from '../types/index';
+import { AxiosRequestConfig, AxiosPromise, AxiosResponse, ResolvedFn, RejectedFn } from '../types/index';
 import dispatchRequest from './dispatchRequest';
+import InterceptorsManager from './InterceptorsManager';
+
+
+interface Interceptors {
+  request: InterceptorsManager<AxiosRequestConfig>
+  response: InterceptorsManager<AxiosResponse>
+}
+
+interface PromiseChain<T> {
+  resolved: ResolvedFn<T> | ((config: AxiosRequestConfig) => AxiosPromise)
+  rejected?: RejectedFn
+}
+
 export default class Axios {
+  interceptors: Interceptors
+  constructor() {
+    this.interceptors = {
+      request: new InterceptorsManager<AxiosRequestConfig>(),
+      response: new InterceptorsManager<AxiosResponse>()
+    }
+  }
   request(url: any, config?: any): AxiosPromise {
     if(typeof url === 'string') {
       if(!config) {
@@ -10,7 +30,29 @@ export default class Axios {
     } else {
       config = url
     }
-    return dispatchRequest(config)
+    // 添加拦截器链式调用，chain变量除了有拦截器还有dispatchRequest
+    const chain: PromiseChain<any>[] = [{
+      resolved: dispatchRequest,
+      rejected: undefined,
+    }]
+    // 遍历拦截器
+    // 请求拦截器，先添加的后执行
+    this.interceptors.request.forEach(interceptor => {
+      chain.unshift(interceptor)
+    })
+    // 响应拦截器，先添加的先执行
+    this.interceptors.response.forEach(interceptor => {
+      chain.push(interceptor)
+    })
+
+    // 依次执行chain中的元素
+    let promise = Promise.resolve(config)
+    while(chain.length) {
+      const { resolved, rejected } = chain.shift()!
+      promise = promise.then(resolved, rejected)
+    }
+    
+    return promise
   }
 
   get(url: string, config?: AxiosRequestConfig): AxiosPromise {

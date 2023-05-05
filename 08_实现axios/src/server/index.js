@@ -107,6 +107,10 @@ router.get('/api/extend/user', (req, res) => {
   })
 })
 
+router.get('/api/interceptor/get', (req, res) => {
+  res.end('good night~~')
+})
+
 app.use(router)
 
 // 定义带参数的接口
