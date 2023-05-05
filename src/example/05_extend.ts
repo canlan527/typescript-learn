@@ -32,18 +32,44 @@ import axios from "../axios";
 
 // axios.patch('/api/extend/patch', {msg: 'patch赤井秀一'})
 
-axios({
-  url: '/api/posts',
-  method: 'post',
-  data: {
-    msg: 'hello~'
-  }
-})
+// axios({
+//   url: '/api/posts',
+//   method: 'post',
+//   data: {
+//     msg: 'hello~'
+//   }
+// })
 
-axios('/api/posts', {
-  method: 'post',
-  data: {
-    msg: '秀哀一生推'
-  }
-})
+// axios('/api/posts', {
+//   method: 'post',
+//   data: {
+//     msg: '秀哀一生推'
+//   }
+// })
 
+// 泛型支持
+interface ResponseData<T = any> {
+  code: number;
+  result: T;
+  message: string;
+}
+
+interface User {
+  name: string;
+  age: number;
+}
+
+function getUser<T>() {
+  return axios<ResponseData<T>>("/api/extend/user")
+    .then((res) => res.data)
+    .catch((e) => console.error(e));
+}
+
+async function test() {
+  const user = await getUser<User>();
+  if (user) {
+    console.log(user.result.name);
+  }
+}
+
+test();

@@ -96,6 +96,16 @@ router.patch('/api/extend/patch', (req, res) => {
   res.json(req.body)
 })
 
+router.get('/api/extend/user', (req, res) => {
+  res.json({
+    code: 0,
+    message: 'success',
+    result: {
+      name: '赤井秀一',
+      age: 33
+    }
+  })
+})
 
 app.use(router)
 
