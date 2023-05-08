@@ -1,4 +1,5 @@
-import { isPlainObject } from "./utils";
+import { isPlainObject, deepMerge } from './utils';
+import { Method } from '../types/index';
 // 实现对headers的配置
 export function processHeaders(headers: any, data: any): any {
   normalizeHeaderName(headers, "Content-Type");
@@ -47,4 +48,20 @@ export function parseHeaders(headers: string): any {
   });
 
   return parsed;
+}
+
+// 格式化headers数据。将接收到的一级配置项删除，保留最终的配置
+export function flattenHeaders(headers: any, method: Method): any {
+  if(!headers) {
+    return headers
+  }
+  headers = deepMerge(headers.common, headers[method], headers)
+
+  const methodToDelete = ['delete', 'get', 'head', 'options', 'post', 'put', 'patch', 'common']
+
+  methodToDelete.forEach(method => {
+    delete headers[method]
+  })
+
+  return headers
 }

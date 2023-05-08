@@ -1,6 +1,7 @@
 import { AxiosRequestConfig, AxiosPromise, AxiosResponse, ResolvedFn, RejectedFn } from '../types/index';
 import dispatchRequest from './dispatchRequest';
 import InterceptorsManager from './InterceptorsManager';
+import mergeConfig from './mergeConfig';
 
 
 interface Interceptors {
@@ -32,6 +33,10 @@ export default class Axios {
     } else {
       config = url
     }
+
+    // 合并配置
+    config = mergeConfig(this.defaults, config)
+
     // 添加拦截器链式调用，chain变量除了有拦截器还有dispatchRequest
     const chain: PromiseChain<any>[] = [{
       resolved: dispatchRequest,
