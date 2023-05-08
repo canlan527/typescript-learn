@@ -111,6 +111,10 @@ router.get('/api/interceptor/get', (req, res) => {
   res.end('good night~~')
 })
 
+router.post('/api/config/post', (req, res) => {
+  res.json(req.body)
+})
+
 app.use(router)
 
 // 定义带参数的接口

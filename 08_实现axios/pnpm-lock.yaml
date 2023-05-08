@@ -1,9 +1,11 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@types/qs': ^6.9.7
   body-parser: ^1.20.2
   express: ^4.18.2
   html-webpack-plugin: ^5.5.1
+  qs: ^6.11.1
   ts-loader: ^9.4.2
   webpack: ^5.80.0
   webpack-cli: ^5.0.2
@@ -13,10 +15,12 @@ dependencies:
   webpack-dev-server: 4.13.3_jc4f5dvs2wdqqxiyzwutswwrge
 
 devDependencies:
+  '@types/qs': 6.9.7
   body-parser: 1.20.2
   express: 4.18.2
   html-webpack-plugin: 5.5.1_webpack@5.80.0
-  ts-loader: 9.4.2_dmnk2hichoesbonenkf5yk7fmy
+  qs: 6.11.1
+  ts-loader: 9.4.2_webpack@5.80.0
   webpack: 5.80.0_webpack-cli@5.0.2
   webpack-cli: 5.0.2_bq2pndxsnh7ufgewnxkfwaxrp4
 
@@ -314,10 +318,8 @@ packages:
     engines: {node: '>=0.4.0'}
     hasBin: true
 
-  /ajv-formats/2.1.1_ajv@8.12.0:
+  /ajv-formats/2.1.1:
     resolution: {integrity: sha512-Wx0Kx52hxE7C18hkMEggYlEifqWZtYaRgouJor+WMdPnQyEK13vgEWyVNup7SoeeoLMsr4kf5h6dOW11I15MUA==}
-    peerDependencies:
-      ajv: ^8.0.0
     peerDependenciesMeta:
       ajv:
         optional: true
@@ -1476,6 +1478,13 @@ packages:
     dependencies:
       side-channel: 1.0.4
 
+  /qs/6.11.1:
+    resolution: {integrity: sha512-0wsrzgTz/kAVIeuxSjnpGC56rzYtr6JT/2BwEvMaPhFIoYa1aGO8LbzuU1R0uUYQkLpWBTOj0l/CLAJB64J6nQ==}
+    engines: {node: '>=0.6'}
+    dependencies:
+      side-channel: 1.0.4
+    dev: true
+
   /randombytes/2.1.0:
     resolution: {integrity: sha512-vYl3iOX+4CKUWuxGi9Ukhie6fsqXqS9FE2Zaic4tNFD2N2QQaXOMFbuKK4QmDHC0JO6B1Zp41J0LpT0oR68amQ==}
     dependencies:
@@ -1608,7 +1617,7 @@ packages:
     dependencies:
       '@types/json-schema': 7.0.11
       ajv: 8.12.0
-      ajv-formats: 2.1.1_ajv@8.12.0
+      ajv-formats: 2.1.1
       ajv-keywords: 5.1.0_ajv@8.12.0
 
   /select-hose/2.0.0:
@@ -1850,7 +1859,7 @@ packages:
     resolution: {integrity: sha512-o5sSPKEkg/DIQNmH43V0/uerLrpzVedkUh8tGNvaeXpfpuwjKenlSox/2O/BTlZUtEe+JG7s5YhEz608PlAHRA==}
     engines: {node: '>=0.6'}
 
-  /ts-loader/9.4.2_dmnk2hichoesbonenkf5yk7fmy:
+  /ts-loader/9.4.2_webpack@5.80.0:
     resolution: {integrity: sha512-OmlC4WVmFv5I0PpaxYb+qGeGOdm5giHU7HwDDUjw59emP2UYMHy9fFSDcYgSNoH8sXcj4hGCSEhlDZ9ULeDraA==}
     engines: {node: '>=12.0.0'}
     peerDependencies:
@@ -1861,7 +1870,6 @@ packages:
       enhanced-resolve: 5.13.0
       micromatch: 4.0.5
       semver: 7.5.0
-      typescript: 5.0.4
       webpack: 5.80.0_webpack-cli@5.0.2
     dev: true
 
@@ -1875,12 +1883,6 @@ packages:
     dependencies:
       media-typer: 0.3.0
       mime-types: 2.1.35
-
-  /typescript/5.0.4:
-    resolution: {integrity: sha512-cW9T5W9xY37cc+jfEnaUvX91foxtHkza3Nw3wkoF4sSlKn0MONdkdEndig/qPBWXNkmplh3NzayQzCiHM4/hqw==}
-    engines: {node: '>=12.20'}
-    hasBin: true
-    dev: true
 
   /unpipe/1.0.0:
     resolution: {integrity: sha512-pjy2bYhSsufwWlKwPc+l3cN7+wuJlK6uz0YdJEOlQDbl6jo/YlPi4mb8agUkVC8BF7V8NuzeyPNqRksA3hztKQ==}

@@ -3,4 +3,5 @@
 // import './example/03_simple'
 // import './example/04_error'
 // import './example/05_extend'
-import './example/06_interceptors'
+// import './example/06_interceptors'
+import './example/07_config'
