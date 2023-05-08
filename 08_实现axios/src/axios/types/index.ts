@@ -15,6 +15,8 @@ export interface AxiosRequestConfig {
   headers?: any,
   responseType?: XMLHttpRequestResponseType,
   timeout?: number,
+  
+  [propName: string]: any,
 }
 
 export interface AxiosResponse<T = any> {
@@ -41,6 +43,7 @@ export interface AxiosError extends Error {
 // 混合对象axios本身是一个函数，我们再实现一个包括属性方法的类，然后把这个类的原型属性和自身属性拷贝到axios上
 
 export interface Axios {
+  defaults: AxiosRequestConfig
   interceptors: {
     request: AxiosInterceptorsManager<AxiosRequestConfig>,
     response: AxiosInterceptorsManager<AxiosResponse>
