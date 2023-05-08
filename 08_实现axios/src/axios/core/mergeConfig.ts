@@ -1,4 +1,5 @@
 import { AxiosRequestConfig } from '../types/index';
+import { isPlainObject, deepMerge } from '../helpers/utils';
 
 // 默认的合并策略：优先取val2的值
 function defaultStrat(val1: any, val2: any): any {
@@ -19,6 +20,29 @@ const stratKeysFromVal2 = ['url', 'data', 'params']
 stratKeysFromVal2.forEach(key => {
   strats[key] = fromVal2Strat
 })
+
+// 复杂合并策略
+function deepMergeStrat(val1: any, val2: any): any {
+  if(isPlainObject(val2)) {
+    return deepMerge(val1, val2)
+  } else if(typeof val2 !== 'undefined') {
+    return  val2;
+  } else if(isPlainObject(val1)) {
+    return deepMerge(val1)
+  } else if(typeof val1 !== 'undefined') {
+    return val1;
+  }
+}
+
+
+
+
+
+const stratKeysDeepMerge = ['header']
+stratKeysDeepMerge.forEach(key => {
+  strats[key] = deepMergeStrat
+})
+
 
 export default function mergeConfig(config1: AxiosRequestConfig, config2: AxiosRequestConfig):AxiosRequestConfig {
   if(!config2) {
