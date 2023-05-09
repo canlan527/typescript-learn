@@ -16,20 +16,42 @@ import axios,{ AxiosTransformer } from '../axios'
 //   console.log(res.data)
 // })
 
-axios({
+// axios({
+//   transformRequest: [(function(data) {
+//     return qs.stringify(data)
+//   }), ...(axios.defaults.transformRequest as AxiosTransformer[])],
+//   transformResponse: [...(axios.defaults.transformResponse as AxiosTransformer[]), function(data) {
+//     if(typeof data === 'object') {
+//       data.b = 'hello tomorrow'
+//     }
+//     return data
+//   }],
+//   url: '/api/config/post',
+//   method: 'post',
+//   data: {
+//     a: 1
+//   }
+// }).then(res => {
+//   console.log(res.data)
+// })
+
+const instance = axios.create({
   transformRequest: [(function(data) {
     return qs.stringify(data)
   }), ...(axios.defaults.transformRequest as AxiosTransformer[])],
   transformResponse: [...(axios.defaults.transformResponse as AxiosTransformer[]), function(data) {
     if(typeof data === 'object') {
-      data.b = 'hello tomorrow'
+      data.age = 18
     }
     return data
   }],
+})
+
+instance({
   url: '/api/config/post',
   method: 'post',
   data: {
-    a: 1
+    name: 'Mary'
   }
 }).then(res => {
   console.log(res.data)
