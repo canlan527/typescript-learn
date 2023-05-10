@@ -115,6 +115,19 @@ router.post('/api/config/post', (req, res) => {
   res.json(req.body)
 })
 
+router.get('/api/cancel/get', (req, res) => {
+  setTimeout(() => {
+    res.json('good night')
+  }, 1000)
+})
+
+router.post('/api/cancel/post', (req, res) => {
+  setTimeout(() => {
+    res.json(req.body)
+  }, 1000)
+})
+
+
 app.use(router)
 
 // 定义带参数的接口
