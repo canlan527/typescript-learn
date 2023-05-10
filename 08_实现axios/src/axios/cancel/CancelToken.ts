@@ -4,7 +4,7 @@ interface ResolvePromise {
   (reason?: string): void
 }
 
-export default class CancelToken {
+export default class CancelToken {``
   promise: Promise<string>
   reason?: string
 
