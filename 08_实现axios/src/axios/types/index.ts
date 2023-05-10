@@ -17,6 +17,7 @@ export interface AxiosRequestConfig {
   timeout?: number,
   transformRequest?:  AxiosTransformer | AxiosTransformer[],
   transformResponse?: AxiosTransformer | AxiosTransformer[],
+  cancelToken?: CancelToken
 
   [propName: string]: any,
 }
@@ -87,4 +88,18 @@ export interface AxiosTransformer {
 // 静态方法接口
 export interface AxiosStatic extends AxiosInstance {
   create(config?: AxiosRequestConfig): AxiosInstance
+}
+
+// 取消请求的接口定义
+export interface CancelToken {
+  promise: Promise<string>
+  reason?: string
+}
+
+export interface Canceler {
+  (message?: string): void
+}
+
+export interface CancelExecutor {
+  (cancel: Canceler): void
 }

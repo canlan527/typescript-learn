@@ -4,7 +4,7 @@ import { createError } from '../helpers/error';
 // 实现所有的请求逻辑
 export default function xhr(config: AxiosRequestConfig): AxiosPromise {
   return new Promise((resolve, reject) => {
-    const { url, method = "GET", data = null, headers, responseType, timeout } = config;
+    const { url, method = "GET", data = null, headers, responseType, timeout, cancelToken } = config;
 
     const request = new XMLHttpRequest(); //新建请求实例
     // 如果传进来responseType就给request对象上也赋值这个属性
@@ -63,6 +63,15 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
         request.setRequestHeader(name, headers[name]);
       }
     });
+
+    // 取消请求
+    if(cancelToken) {
+      cancelToken.promise.then(reason => {
+        // abort方法 如果该请求已被发出， XMLHttpRequest.abort () 方法将终止该请求
+        request.abort()
+        reject(reason)
+      })
+    }
 
     // send 发送请求
     request.send(data);
