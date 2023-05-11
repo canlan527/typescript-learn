@@ -5,4 +5,5 @@
 // import './example/05_extend'
 // import './example/06_interceptors'
 // import './example/07_config'
-import './example/08_cancel'
+// import './example/08_cancel'
+import './example/09_withCredentials'

@@ -1,8 +1,11 @@
 const express = require('express');
 const bodyParser = require('body-parser')
+const cookieParser = require('cookie-parser')
 const app = express();
 const port = 3000;
 const router = express.Router();
+
+require('./server2')
 
 app.listen(port, () => {
   console.log('🚀 服务已启动');
@@ -38,6 +41,8 @@ const data = [
 // })
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:true}))
+app.use(cookieParser())
+
 // simple1
 router.get('/api/posts', (req, res) => {
   res.json(req.query)
@@ -125,6 +130,11 @@ router.post('/api/cancel/post', (req, res) => {
   setTimeout(() => {
     res.json(req.body)
   }, 1000)
+})
+
+//more
+router.get('/api/more/withcredential/get', (req, res) => {
+  res.json(req.cookies)
 })
 
 

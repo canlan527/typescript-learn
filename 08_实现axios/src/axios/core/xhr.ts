@@ -4,7 +4,7 @@ import { createError } from '../helpers/error';
 // 实现所有的请求逻辑
 export default function xhr(config: AxiosRequestConfig): AxiosPromise {
   return new Promise((resolve, reject) => {
-    const { url, method = "GET", data = null, headers, responseType, timeout, cancelToken } = config;
+    const { url, method = "GET", data = null, headers, responseType, timeout, cancelToken, withCredentials } = config;
 
     const request = new XMLHttpRequest(); //新建请求实例
     // 如果传进来responseType就给request对象上也赋值这个属性
@@ -14,6 +14,10 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
     // 如果没传timeout默认为0，即没有延迟
     if(timeout) {
       request.timeout = timeout
+    }
+    // 判断跨域请求是否允许携带cookie
+    if(withCredentials) {
+      request.withCredentials = withCredentials
     }
     
     //  调用open方法:方法名（大写），地址，默认异步
