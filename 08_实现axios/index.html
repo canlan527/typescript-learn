@@ -4,9 +4,24 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- CSS -->
+  <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.6.2/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
   <title>ts-axios</title>
 </head>
 <body>
-  
+  <div class="content">
+    <h1>file download</h1>
+    <div>
+      <button id="download" type="button" class="btn btn-primary">Download</button>
+    </div>
+    <h1>file upload</h1>
+    <div>
+      <form role="form" class="form" onsubmit="return false;">
+        <input id="file" type="file" class="form-control">
+        <button id="upload" type="button" class="btn btn-primary">Upload</button>
+      </form>
+    </div>
+  </div>
 </body>
 </html>

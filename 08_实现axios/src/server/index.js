@@ -1,6 +1,8 @@
+const path = require('path')
 const express = require('express');
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
+const multipart = require('connect-multiparty')
 const app = express();
 const port = 3000;
 const router = express.Router();
@@ -50,6 +52,9 @@ const data = [
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(cookieParser())
+app.use(multipart({
+  uploadDir: path.resolve(__dirname, 'upload-files')
+}))
 
 // simple1
 router.get('/api/posts', (req, res) => {
@@ -148,6 +153,13 @@ router.get('/api/more/withcredential/get', (req, res) => {
 router.get('/api/more/get', (req,res) => {
   res.cookie('XSRF-TOKEN-XN', 'good-night~')
   res.json(req.cookies)
+})
+
+// 上传
+router.post('/api/upload', (req, res) => {
+  console.log(req.body, req.files);
+  console.log(123);
+  res.end('upload success!')
 })
 
 app.use(router)
