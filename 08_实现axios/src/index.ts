@@ -6,4 +6,5 @@
 // import './example/06_interceptors'
 // import './example/07_config'
 // import './example/08_cancel'
-import './example/09_withCredentials'
+// import './example/09_withCredentials'
+import './example/10_cookie'

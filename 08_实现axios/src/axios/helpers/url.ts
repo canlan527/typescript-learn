@@ -1,5 +1,11 @@
 import { isDate, isObject, isPlainObject } from './utils';
 // 存放url相关的辅助函数
+
+interface URLOrigin {
+  protocol: string,
+  host: string
+}
+
 function encode(val: string): string {
   return encodeURIComponent(val)
     .replace(/%40/g, '@')
@@ -48,4 +54,19 @@ export function buildURL(url: string, params?: any) :string {
     
   }
   return url
+}
+
+// 判断是否是同源url
+export function isURLSameOrigin(requestURL: string): boolean {
+  const parseOrigin = resolveURL(requestURL)
+  return (parseOrigin.protocol === currentOrigin.protocol && parseOrigin.host === currentOrigin.host)
+}
+
+const urlParsingNode = document.createElement('a')
+const currentOrigin = resolveURL(window.location.href)
+function resolveURL(url: string):URLOrigin {
+  urlParsingNode.setAttribute('href', url)
+  const { protocol, host } = urlParsingNode
+
+  return { protocol, host}
 }

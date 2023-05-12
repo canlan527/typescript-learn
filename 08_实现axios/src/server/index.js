@@ -39,6 +39,14 @@ const data = [
 // app.get('/posts', (req, res) => {
 //   res.send(data)
 // })
+
+// app.use(express.static(__dirname, {
+//   setHeaders(res) {
+//     console.log(res);
+//     res.cookie('XSRF-TOKEN-XN', 'good~night')
+//   }
+// }))
+
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(cookieParser())
@@ -137,6 +145,10 @@ router.get('/api/more/withcredential/get', (req, res) => {
   res.json(req.cookies)
 })
 
+router.get('/api/more/get', (req,res) => {
+  res.cookie('XSRF-TOKEN-XN', 'good-night~')
+  res.json(req.cookies)
+})
 
 app.use(router)
 
