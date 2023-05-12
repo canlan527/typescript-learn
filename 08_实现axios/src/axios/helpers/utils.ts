@@ -13,6 +13,11 @@ export function isPlainObject(val: any) :val is Object {
   return toString.call(val) === '[object Object]'
 }
 
+// 判断请求的Content-Type是否是FormData类型
+export function isFormData(val: any): val is FormData {
+  return typeof val !== 'undefined' && val instanceof FormData
+}
+
 // extend用作拷贝,交叉类型,把 from 拷贝到 to里
 export function extend<T, U>(to: T, from: U): T & U {
   for (const key in from) {
