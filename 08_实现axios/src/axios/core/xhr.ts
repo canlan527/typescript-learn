@@ -20,6 +20,7 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
       xsrfHeaderName,
       onDownloadProgress,
       onUploadProgress,
+      auth,
     } = config;
 
     const request = new XMLHttpRequest(); //新建请求实例
@@ -121,6 +122,10 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
         if (xsrfValue && xsrfHeaderName) {
           headers[xsrfHeaderName] = xsrfValue;
         }
+      }
+
+      if(auth) {
+        headers['Authorization'] = 'Basic ' + btoa(`${auth.username}:${auth.password}`)
       }
 
       // 处理headers,如果data为空就删除content-type项，否则将传入的headers配置设置进xhr的headers里

@@ -3,6 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
 const multipart = require('connect-multiparty')
+const atob = require('atob')
 const app = express();
 const port = 3000;
 const router = express.Router();
@@ -160,6 +161,20 @@ router.post('/api/upload', (req, res) => {
   console.log(req.body, req.files);
   console.log(123);
   res.end('upload success!')
+})
+
+// auth
+router.post('/api/more/post', (req, res) => {
+  const auth = req.headers.authorization
+  const [ type, credentials ] = auth.split(' ')
+  console.log(atob(credentials));
+  const [ username, password ] = atob(credentials).split(':')
+  if(type === 'Basic' && username === 'jxz666' && password === '123456') {
+    res.json(req.body)
+  } else {
+    res.status(401)
+    res.end("UnAthorization")
+  }
 })
 
 app.use(router)
