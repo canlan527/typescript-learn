@@ -9,4 +9,5 @@
 // import './example/09_withCredentials'
 // import './example/10_cookie'
 // import './example/11_upload&download'
-import './example/12_auth'
+// import './example/12_auth'
+import './example/13_304'

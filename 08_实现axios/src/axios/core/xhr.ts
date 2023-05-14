@@ -21,6 +21,7 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
       onDownloadProgress,
       onUploadProgress,
       auth,
+      validateStatus,
     } = config;
 
     const request = new XMLHttpRequest(); //新建请求实例
@@ -82,8 +83,8 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
           statusText: request.statusText,
           headers: responseHeaders,
         };
-        resolve(response);
-        // handleResponse(response) // 根据正常\非正常情况做处理
+        // resolve(response);
+        handleResponse(response) // 根据正常\非正常情况做处理
       };
       // 处理错误情况
       request.onerror = function handleError() {
@@ -152,7 +153,7 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
     // 根据返回状态码做不同处理
     function handleResponse(response: AxiosResponse): void {
       // 如果响应状态码在 200 - 300之间(正常情况)
-      if (response.status >= 200 && response.status < 300) {
+      if (!validateStatus || validateStatus(response.status)) {
         resolve(response); // 之后通过promise.then就可以拿到响应对象
       } else {
         reject(

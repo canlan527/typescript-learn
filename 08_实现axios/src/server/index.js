@@ -177,6 +177,12 @@ router.post('/api/more/post', (req, res) => {
   }
 })
 
+// response.status
+router.get('/api/more/304', (req, res) => {
+  res.status(304)
+  res.end()
+})
+
 app.use(router)
 
 // 定义带参数的接口
