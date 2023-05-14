@@ -183,6 +183,14 @@ router.get('/api/more/304', (req, res) => {
   res.end()
 })
 
+// 实例方法
+router.get('/api/more/name', (req, res) => {
+  res.end('赤井秀一')
+})
+router.get('/api/more/age', (req, res) => {
+  res.end('33')
+})
+
 app.use(router)
 
 // 定义带参数的接口

@@ -2,6 +2,7 @@ import { AxiosRequestConfig, AxiosPromise, AxiosResponse, ResolvedFn, RejectedFn
 import dispatchRequest from './dispatchRequest';
 import InterceptorsManager from './InterceptorsManager';
 import mergeConfig from './mergeConfig';
+import { transformURL } from './dispatchRequest';
 
 
 interface Interceptors {
@@ -88,6 +89,11 @@ export default class Axios {
 
   patch(url: string, data?: any, config?: AxiosRequestConfig): AxiosPromise {
     return this.request({...config, method: 'patch', url, data})
+  }
+
+  getUri(config?: AxiosRequestConfig): string {
+    config = mergeConfig(this.defaults, config!)
+    return transformURL(config)
   }
 
 }

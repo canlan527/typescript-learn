@@ -12,4 +12,5 @@
 // import './example/12_auth'
 // import './example/13_304'
 // import './example/14_serializer'
-import './example/15_baseURL'
+// import './example/15_baseURL'
+import './example/16_实例方法'

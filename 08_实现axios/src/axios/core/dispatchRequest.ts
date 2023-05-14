@@ -23,7 +23,7 @@ function processConfig(config: AxiosRequestConfig): void {
   config.headers = flattenHeaders(config.headers, config.method!)
 }
 // 处理config的url和params
-function transformURL(config: AxiosRequestConfig): string {
+export function transformURL(config: AxiosRequestConfig): string {
   let { url, params, paramsSerializer, baseURL } = config;
   if(baseURL && !isAbsoluteURL(url!)) {
     url = conbineURL(baseURL, url)

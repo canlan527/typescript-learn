@@ -21,4 +21,20 @@ axios.create = function create(config) {
 axios.CancelToken = CancelToken
 axios.Cancel = Cancel
 axios.isCancel = isCancel
+
+// 扩展静态方法
+axios.all = function all(promises) {
+  return Promise.all(promises)
+}
+
+axios.spread = function spread(callback) {
+  return (arr) => {
+    return callback.apply(null, arr)
+  }
+}
+
+axios.Axios = Axios
+
+
+
 export default axios;

@@ -67,6 +67,8 @@ export interface Axios {
   post<T = any>(url: string, data?: any, config?: AxiosRequestConfig): AxiosPromise<T>
   put<T = any>(url: string, data?: any, config?: AxiosRequestConfig): AxiosPromise<T>
   patch<T = any>(url: string, data?: any, config?: AxiosRequestConfig): AxiosPromise<T>
+
+  getUri(config?: AxiosRequestConfig): string
 }
 // 混合类型的接口
 export interface AxiosInstance extends Axios {
@@ -93,6 +95,10 @@ export interface AxiosTransformer {
   (data: any, headers?: any): any
 }
 
+export interface AxiosClassStatic {
+  new (config: AxiosRequestConfig): Axios
+}
+
 // 静态方法接口
 export interface AxiosStatic extends AxiosInstance {
   create(config?: AxiosRequestConfig): AxiosInstance
@@ -100,6 +106,10 @@ export interface AxiosStatic extends AxiosInstance {
   CancelToken: CancelTokenStatic
   Cancel: CancelStatic
   isCancel: (val: any) => boolean
+
+  all<T>(promises: Array<T | Promise<T>> ): Promise<T[]>
+  spread<T, R>(callback:(...args: T[]) => R): (arr: T[]) => R
+  Axios: AxiosClassStatic
 }
 
 // 取消请求的接口定义
