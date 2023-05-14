@@ -18,6 +18,11 @@ export function isFormData(val: any): val is FormData {
   return typeof val !== 'undefined' && val instanceof FormData
 }
 
+// 判断请求的url里的参数是否是 URLSearchParams 类型
+export function isURLSearchParams(val: any): val is URLSearchParams {
+  return typeof val !== 'undefined' && val instanceof URLSearchParams
+}
+
 // extend用作拷贝,交叉类型,把 from 拷贝到 to里
 export function extend<T, U>(to: T, from: U): T & U {
   for (const key in from) {
