@@ -4,6 +4,7 @@ import { buildURL } from "../helpers/url";
 // import { transformRequest, transformResponse } from '../helpers/data';
 import { processHeaders, flattenHeaders } from '../helpers/headers';
 import transform from './transform';
+import { isAbsoluteURL, conbineURL } from '../helpers/url';
 
 // 作为库的入口文件
 export default function dispatchRequest(config: AxiosRequestConfig): AxiosPromise {
@@ -23,7 +24,10 @@ function processConfig(config: AxiosRequestConfig): void {
 }
 // 处理config的url和params
 function transformURL(config: AxiosRequestConfig): string {
-  const { url, params, paramsSerializer } = config;
+  let { url, params, paramsSerializer, baseURL } = config;
+  if(baseURL && !isAbsoluteURL(url!)) {
+    url = conbineURL(baseURL, url)
+  }
   return buildURL(url!, params, paramsSerializer); // 非空断言url，在运行时肯定有值
 }
 

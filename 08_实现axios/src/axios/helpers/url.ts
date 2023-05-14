@@ -71,6 +71,17 @@ export function buildURL(
   return url;
 }
 
+// 判断url是否是完整协议的路径 http:// | https:// | //
+export function isAbsoluteURL(url: string): boolean {
+  const reg = /(^[a-z][a-z\d\+\-\.]*:)?\/\//i
+  return reg.test(url)
+}
+// 把baseURL末尾的一个或者多个斜线replace成空,  把 relativeURL开头的一个或者多个斜线replace成空
+export function conbineURL(baseURL: string, relativeURL?: string): string {
+  return relativeURL ? baseURL.replace(/\/+$/, '') + "/" + relativeURL.replace(/^\/+/, ''): baseURL
+}
+
+
 // 判断是否是同源url
 export function isURLSameOrigin(requestURL: string): boolean {
   const parseOrigin = resolveURL(requestURL);
