@@ -1,4 +1,4 @@
-// 抽象类 abstruct
+// // 抽象类 abstruct
 // class Rectangle {
 //   constructor(public width: number, public height: number) {
     
@@ -19,7 +19,7 @@
 //   }
 // }
 
-// any类型不合适
+// // any类型不合适
 // function calcArea(shape:any) {
 //   return shape.getArea()
 // }

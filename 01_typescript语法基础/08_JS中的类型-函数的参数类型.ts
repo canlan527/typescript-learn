@@ -26,6 +26,3 @@ for(const item of lyricInfos) {
 }
 
 export {}
-
-
-export {}

@@ -32,7 +32,7 @@ if(info.friend) {
 info.friend!.name = 'coder'
 // console.log(info.friend?.name)
 
-// 我get不到非空断言你的任何好处 用你不如不用你 债见！
+// 
 function liveDangerously(x?: number | null) {
   // No error
   console.log(x!.toFixed());

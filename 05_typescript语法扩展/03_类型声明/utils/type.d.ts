@@ -31,7 +31,7 @@ type PersonType = {
 //   new(): HTMLImageElement;
 // };
 
-// Document  // 转到类型定义查看Document
+// // Document  // 转到类型定义查看Document
 
 // declare var Document: {
 //   prototype: Document;
