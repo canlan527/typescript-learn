@@ -33,7 +33,7 @@ TypeScript 从编译到运行的过程大致如下：
 | **JS** | **5. AST -> 字节码**                     |
 |        | **6. 运行时计算字节码**                  |
 
-第1~3步由 TSC 操作，4~6步由浏览器/ NodeJS 或者其他 JavaScript 引擎中的 JavaScript 运行时操作。
+>  第1~3步由 TSC 操作，4~6步由浏览器/ NodeJS 或者其他 JavaScript 引擎中的 JavaScript 运行时操作。
 
 （JavaScript 编译器和运行时通常聚在一个成为引擎的程序中。V8、JSCore 都是如此）
 
